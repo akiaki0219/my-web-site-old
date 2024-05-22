@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+client_secret_558360071101-0rmj5vc0gp5ouaf02n1pe58popcor81c.apps.googleusercontent.com.json
 
 # testing
 /coverage
@@ -12,6 +13,7 @@
 /build
 
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local
