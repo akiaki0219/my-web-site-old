@@ -5,3 +5,9 @@
 .main-content {
   margin-top: 3rem;
 }
+.nav-link {
+  text-align: center;
+}
+.link {
+  margin: 10px;
+}

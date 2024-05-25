@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 
 const YOUTUBE_SEARCH_API_URL: string = process.env.REACT_APP_YOUTUBE_SEARCH_API_URL! as string;
 const API_KEY: string = process.env.REACT_APP_API_KEY! as string;
@@ -20,8 +20,6 @@ function LatestVideo() {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log("API success:", result);
-
           if (result.items && result.items.length !== 0) {
             setVideoId(result.items[0].id.videoId);
           }
@@ -33,14 +31,17 @@ function LatestVideo() {
   }, []);
 
   return (
-    <iframe
-      id="player"
-      title="LatestVideo"
-      width="640"
-      height="360"
-      src={"https://www.youtube.com/embed/" + videoId}
-      allowFullScreen
-    />
+    <div>
+      <h5>Latest Video</h5>
+      <iframe
+        id="player"
+        title="LatestVideo"
+        width="640"
+        height="360"
+        src={"https://www.youtube.com/embed/"+videoId}
+        allowFullScreen
+      />
+    </div>
   );
 };
 

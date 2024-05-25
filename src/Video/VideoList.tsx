@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoItem from './VideoItem';
-import {VideoObject} from '../types';
+import {VideoObject} from './types';
 
 interface VideoListProps {
   videos: VideoObject[];

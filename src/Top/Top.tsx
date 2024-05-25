@@ -1,9 +1,10 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/App.css';
+import React from 'react';
 import AppHeader from '../App/AppHeader';
-import LatestVideo from "./LatestVideo";
-import TopVideo from './TopVideo';
+import Profile from './Profile';
+import Video from './Video';
 import AppFooter from '../App/AppFooter';
 
 function Top() {
@@ -12,15 +13,18 @@ function Top() {
       <nav className="navbar header navbar-dark bg-dark fixed-top">
         <AppHeader />
       </nav>
+
       <div className="container-fluid main-content pt-3">
-        <h1>My Web Site</h1>
+        <div>
+          <h2>My web Site</h2>
+        </div>
+        <Profile />
+        <Video />
+        <div>
+          <h4>Blog</h4>
+        </div>
       </div>
-      <div className="container-fluid main-content pt-3">
-        <h1>Latest Video</h1>
-        <LatestVideo />
-        <h1>Most Viewed Video</h1>
-        <TopVideo />
-      </div>
+
       <div className="navbar navbar-dark bg-dark">
         <AppFooter />
       </div>

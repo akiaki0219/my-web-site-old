@@ -1,10 +1,11 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/App.css';
-import fetchVideoList from '../utils/fetchVideoList';
-import {VideoObject} from '../types';
+import {latestAllVideoList, oldestAllVideoList} from '../utils/fetchVideoList';
+import {VideoObject} from './types';
 import {useState, useEffect} from 'react';
 import AppHeader from '../App/AppHeader';
+import SortandFilter from './SortandFilter';
 import VideoList from './VideoList';
 import AppFooter from '../App/AppFooter';
 
@@ -13,15 +14,34 @@ function Video() {
 
   useEffect(() => {
     const fetchVideo = async () => {
-      const videoList = await fetchVideoList();
-      console.log("Video list fetched:", videoList)
+      const fetchVideoList = await latestAllVideoList();
+      console.log("fetched Video list:", fetchVideoList);
       if (videoList) {
+        const videoList = fetchVideoList as unknown as VideoObject[];
         setVideoList(videoList);
       }
     };
-
     fetchVideo();
   }, []);
+
+  const applySortFilter = async (order: 'latest' | 'oldest', filterType: string[], filterCharacter: string[]) => {
+    let NewVideoList: VideoObject[] | null = [];
+    if (order==='oldest') {
+      const fetchNewVideoList = await oldestAllVideoList();
+      NewVideoList = fetchNewVideoList as unknown as VideoObject[];
+    }
+    else {
+      const fetchNewVideoList = await latestAllVideoList();
+      NewVideoList = fetchNewVideoList as unknown as VideoObject[];
+    }
+    
+    if (NewVideoList) {
+      NewVideoList = NewVideoList.filter(video => filterType.includes(video.type.name));
+      NewVideoList = NewVideoList.filter(video => video.used.some(use => filterCharacter.includes(use.character.name)));
+      console.log('Video list:', NewVideoList);
+      setVideoList(NewVideoList);
+    }
+  }
 
   return (
     <div className="App">
@@ -29,12 +49,20 @@ function Video() {
         <AppHeader />
       </nav>
       <div className="container-fluid main-content pt-3">
-        <h1>Video</h1>
-        <VideoList videos={videoList}/>
+        <h1>Video List</h1>
+        <SortandFilter applySortFilter={applySortFilter}/>
+        {videoList.length===0
+          ? <div className="container">
+              <h2>There is No Video</h2>
+              <br/>
+              <h5>Please retry after Changing search parameters.</h5>
+            </div>
+          : <VideoList videos={videoList} />
+        }  
       </div>
-      <nav className="navbar footer navbar-dark bg-dark fixed-bottom">
+      <div className="navbar navbar-dark bg-dark">
         <AppFooter />
-      </nav>
+      </div>
       <script src="main.js"></script>
     </div>
   );
