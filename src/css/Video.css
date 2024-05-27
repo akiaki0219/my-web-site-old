@@ -1,9 +1,47 @@
+.video-sort-filter-list {
+  margin: 2rem;
+  padding: 1rem;
+  border: 5px solid #999;
+  border-radius: 30px;
+}
+.video-form-items {
+  padding-left: 10px;
+  text-align: left;
+}
 .video-content {
   margin-top: 3rem;
   border: 2px solid white; 
   border-radius: 100px;
 }
-.link {
+.video-link {
   margin-top: 5px;
   margin-bottom: 5px;
+  margin-left: 10px;
+}
+.video-player {
+  margin: 15px;
+  object-fit: contain;
+  height: 90%;
+  aspect-ratio: 16/9;
+}
+.btn {
+  margin-top: 0.7rem;
+}
+.video-h1 {
+  margin-top: 2rem;
+}
+.video-h1-lg {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.video-table {
+  table-layout: fixed;
+  width: 60%;
+  justify-content: center;
+}
+.video-character {
+  text-align: right
+}
+.video-character-list {
+  text-align: left;
 }

@@ -1,46 +1,40 @@
+import {fetchLatestVideo} from '../utils/fetchVideo';
+import {LatestVideoObject} from '../Video/types';
 import React, {useState, useEffect} from "react";
 
-const YOUTUBE_SEARCH_API_URL: string = process.env.REACT_APP_YOUTUBE_SEARCH_API_URL! as string;
-const API_KEY: string = process.env.REACT_APP_API_KEY! as string;
-
 function LatestVideo() {
-  const [videoId, setVideoId] = useState("");
+  const [latestVideo, setLatestVideo] = useState<LatestVideoObject>();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const params = {
-      key: API_KEY,
-      channelId: "UCG6CzweaohMczHNS5tfI4UA",
-      order: "date",
-      type: "video",
-      maxResults: "1",
+    const fetchVideo = async () => {
+      const fetchVideo = await fetchLatestVideo();
+      if (fetchVideo) {
+        const latestVideo = fetchVideo as unknown as LatestVideoObject;
+        console.log(latestVideo);
+        setLatestVideo(latestVideo);
+        setIsLoaded(true);
+      }
     };
-    const queryParams = new URLSearchParams(params);
-
-    fetch(YOUTUBE_SEARCH_API_URL + queryParams)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          if (result.items && result.items.length !== 0) {
-            setVideoId(result.items[0].id.videoId);
-          }
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+    fetchVideo();
   }, []);
 
   return (
     <div>
       <h5>Latest Video</h5>
-      <iframe
-        id="player"
-        title="LatestVideo"
-        width="640"
-        height="360"
-        src={"https://www.youtube.com/embed/"+videoId}
-        allowFullScreen
-      />
+      {!isLoaded && <p>Now Loading...</p>}
+      {latestVideo &&
+        <div className="top-video-content row justify-content-center">
+          <iframe
+            id="player"
+            title="LatestVideo"
+            src={latestVideo.YouTube 
+              ? `https://www.youtube.com/embed/${latestVideo.YouTube}`
+              : `https://embed.nicovideo.jp/watch/sm${latestVideo.niconico}`}
+            allowFullScreen
+          />
+        </div>
+      }
     </div>
   );
 };

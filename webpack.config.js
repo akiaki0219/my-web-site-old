@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const {VanillaExtractPlugin} = require('@vanilla-extract/webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -21,17 +22,28 @@ module.exports = {
       "crypto": require.resolve("crypto-browserify"),
     }
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
-  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(dotenv.config().parsed)
+    }),
+    new VanillaExtractPlugin({
+      exclude: /\.vanilla\.css$/i
     })
   ],
+  module: {
+    rules: [
+      {
+        test: [/\.css$/, /\.vanilla\.css$/i],
+        use: ["style-loader", "css-loader",
+          MiniCssExtractPlugin.loader,
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              url: false
+            }
+          }
+        ]
+      },
+    ],
+  },
 }

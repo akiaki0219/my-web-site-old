@@ -11,6 +11,8 @@ client_secret_558360071101-0rmj5vc0gp5ouaf02n1pe58popcor81c.apps.googleuserconte
 
 # production
 /build
+/src/Blog
+/src/Contact
 
 # misc
 .env

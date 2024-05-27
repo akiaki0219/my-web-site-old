@@ -1,29 +1,19 @@
-import {VideoObject} from './types';
+import React from 'react';
 
 type StatenicoVideoPlayer = {
-  NicoVideo: VideoObject;
+  niconico: string;
 }
 
-function NicoVideoPlayer({NicoVideo}: StatenicoVideoPlayer) {
+function NicoVideoPlayer({niconico}: StatenicoVideoPlayer) {
   return (
-    <div className="container">
-      <iframe className="d-none d-md-block"
+    <div className="row justify-content-center">
+      <iframe className="video-player"
         id="player"
         title="niconico"
-        width="426"
-        height="240"
-        src={`https://embed.nicovideo.jp/watch/sm${NicoVideo.niconico}`}
+        src={`https://embed.nicovideo.jp/watch/sm${niconico}`}
         allowFullScreen
+        loading="lazy"
       />
-      <iframe className="d-block d-md-none"
-        id="player"
-        title="niconico"
-        width="256"
-        height="144"
-        src={`https://ext.nicovideo.jp/thumb/sm${NicoVideo.niconico}`}
-        allowFullScreen>
-        <a href={`https://www.nicovideo.jp/watch/sm${NicoVideo.niconico}`}>{NicoVideo.title}</a>
-      </iframe>
     </div>
   );
 };

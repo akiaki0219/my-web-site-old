@@ -1,3 +1,4 @@
+import '../css/Top.css';
 import React, {useState, useEffect} from "react";
 
 const YOUTUBE_SEARCH_API_URL: string = process.env.REACT_APP_YOUTUBE_SEARCH_API_URL! as string;
@@ -5,6 +6,7 @@ const API_KEY: string = process.env.REACT_APP_API_KEY! as string;
 
 function TopVideo() {
   const [videoId, setVideoId] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const params = {
@@ -22,25 +24,27 @@ function TopVideo() {
         (result) => {
           if (result.items && result.items.length !== 0) {
             setVideoId(result.items[0].id.videoId);
+            setIsLoaded(true);
           }
-        },
+        })
+      .catch(
         (error) => {
           console.error(error);
-        }
-      );
+        });
   }, []);
 
   return (
     <div>
       <h5>Top Video (based on YouTube data)</h5>
-      <iframe
-        id="player"
-        title="TopVideo"
-        width="640"
-        height="360"
-        src={"https://www.youtube.com/embed/"+videoId}
-        allowFullScreen
-      />
+      {!isLoaded && <p>Now Loading...</p>}
+      <div className="top-video-content row justify-content-center">
+        <iframe
+          id="player"
+          title="TopVideo"
+          src={"https://www.youtube.com/embed/"+videoId}
+          allowFullScreen
+        />       
+      </div>
     </div>
   );
 };

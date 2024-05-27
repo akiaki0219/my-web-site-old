@@ -1,18 +1,22 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/App.css';
+import '../css/Top.css';
 import React from 'react';
 
 function ProfileList() {
   return (
-    <div>
-      <h5>history</h5>
-      <ul>
-        <li className="row">
-          <p className="col-6">2023/9/13</p>
-          <p className="col-6">投稿開始</p>
-        </li>
-      </ul>
+    <div className="top-profile">
+      <h4>history</h4>
+      <table className="table top-table justify-content-center" align="center">
+        <tr>
+          <th>Date</th>
+          <th>Event</th>
+        </tr>
+        <tr>
+          <td>2023/9/13</td>
+          <td>動画投稿開始</td>
+        </tr>
+      </table>
     </div>
   )
 }

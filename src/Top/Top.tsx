@@ -1,6 +1,7 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/App.css';
+import '../css/Top.css';
 import React from 'react';
 import AppHeader from '../App/AppHeader';
 import Profile from './Profile';
@@ -18,10 +19,15 @@ function Top() {
         <div>
           <h2>My web Site</h2>
         </div>
-        <Profile />
-        <Video />
-        <div>
+        <div className="top-main-content">
+          <Profile />
+        </div>
+        <div className="top-main-content">
+          <Video />
+        </div>
+        <div  className="top-main-content">
           <h4>Blog</h4>
+          <h6>Coming soon...</h6>
         </div>
       </div>
 

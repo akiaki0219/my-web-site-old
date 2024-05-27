@@ -1,25 +1,18 @@
+import React from 'react';
+
 type StateYouTubePlayer = {
   YouTube: string;
 }
 
 function YouTubePlayer({YouTube}: StateYouTubePlayer) {
   return (
-    <div className="container">
-      <iframe className="d-none d-md-block"
+    <div className="row justify-content-center">
+      <iframe className="video-player"
         id="player"
         title="YouTube"
-        width="426"
-        height="240"
         src={`https://www.youtube.com/embed/${YouTube}`}
         allowFullScreen
-      />
-      <iframe className="d-block d-md-none"
-        id="player"
-        title="YouTube"
-        width="256"
-        height="144"
-        src={`https://www.youtube.com/embed/${YouTube}`}
-        allowFullScreen  
+        loading="lazy"
       />
     </div>
   );

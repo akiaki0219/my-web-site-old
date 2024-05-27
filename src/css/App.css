@@ -4,10 +4,10 @@
 }
 .main-content {
   margin-top: 3rem;
+  margin-bottom: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .nav-link {
   text-align: center;
-}
-.link {
-  margin: 10px;
 }

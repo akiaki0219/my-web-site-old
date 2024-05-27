@@ -1,11 +1,14 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/App.css';
+import '../css/Top.css';
 import React from 'react';
 
 function ProfileBody() {
   return (
-    <h5>ボイロ実況、ボカロ投稿者</h5>
+    <div className="top-profile">
+      <h4>Profile</h4>
+      <h5>ボイロ実況、ボカロカバー投稿者</h5>
+    </div>
   );
 }
 
